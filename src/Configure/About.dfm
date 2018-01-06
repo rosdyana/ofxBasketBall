@@ -1,0 +1,103 @@
+object AboutForm: TAboutForm
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'About'
+  ClientHeight = 245
+  ClientWidth = 325
+  Color = clWhite
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object versionLabel: TLabel
+    Left = 16
+    Top = 86
+    Width = 20
+    Height = 16
+    Caption = 'ver.'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clGray
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+  end
+  object siteLabel: TLabel
+    Left = 16
+    Top = 156
+    Width = 14
+    Height = 16
+    Cursor = crHandPoint
+    Caption = 'url'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlue
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+    OnClick = siteLabelClick
+  end
+  object productLabel: TLabel
+    Left = 16
+    Top = 19
+    Width = 80
+    Height = 29
+    Caption = 'Product'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object trialLabel: TLabel
+    Left = 16
+    Top = 178
+    Width = 295
+    Height = 16
+    Caption = 'This is trial version, limited by running time or logo.'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGray
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object descriptionLabel: TLabel
+    Left = 16
+    Top = 56
+    Width = 63
+    Height = 16
+    Caption = 'Description'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGray
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Image1: TImage
+    Left = 200
+    Top = 8
+    Width = 105
+    Height = 105
+  end
+  object Button1: TButton
+    Left = 219
+    Top = 200
+    Width = 89
+    Height = 33
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 0
+  end
+end
