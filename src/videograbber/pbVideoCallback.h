@@ -5,4 +5,4 @@
 using namespace cv;
 using namespace std;
 
-typedef void (* pbVideoGrabberCallbackType)( const Mat &image, void *param ) ;
+typedef void (* pbVideoGrabberCallbackType)(const Mat &image, void *param) ;

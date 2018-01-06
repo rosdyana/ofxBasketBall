@@ -10,20 +10,20 @@ using namespace std;
 class pbHaarDetector
 {
 public:
-	void setup( const string &cascadeFileName,		
-						    const string &internalId,	
-							float minSizeRel	
-							);
-	
+    void setup(const string &cascadeFileName,
+               const string &internalId,
+               float minSizeRel
+              );
 
-	vector<cv::Rect> find( const Mat &img, bool debugDraw );
+
+    vector<cv::Rect> find(const Mat &img, bool debugDraw);
 private:
-	CascadeClassifier _cascade;
-	float kMinSizeRel;
+    CascadeClassifier _cascade;
+    float kMinSizeRel;
 
-	Mat _gray;
-	Mat _debugDrawImg;
+    Mat _gray;
+    Mat _debugDrawImg;
 
-	string _internalId;
+    string _internalId;
 
 };

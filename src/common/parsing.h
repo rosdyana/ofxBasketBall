@@ -9,21 +9,22 @@ using namespace std;
 
 #include "converter.h"
 
-//ћодуль парсинга строк 
+//ћодуль парсинга строк
 
-class Parsing {
+class Parsing
+{
 public:
 
-	//разбить строку на подстроки, использу€ разделитель delim
-	static vector<string> split( const string &str, const string &delim );
-	
-	//фильтрует пробелы и табул€ции
-	static vector<string> splitFiltered( const string &str, const string &delim );
-	static vector<float> splitFilteredFloat( const string &str, const string &delim );
-	static vector<int> splitFilteredInt( const string &str, const string &delim );
+    //разбить строку на подстроки, использу€ разделитель delim
+    static vector<string> split(const string &str, const string &delim);
 
-	//фильтрует пробелы и табул€ции
-	static vector<float> splitToFloats( const string &str, const string &delim );
+    //фильтрует пробелы и табул€ции
+    static vector<string> splitFiltered(const string &str, const string &delim);
+    static vector<float> splitFilteredFloat(const string &str, const string &delim);
+    static vector<int> splitFilteredInt(const string &str, const string &delim);
+
+    //фильтрует пробелы и табул€ции
+    static vector<float> splitToFloats(const string &str, const string &delim);
 
 };
 

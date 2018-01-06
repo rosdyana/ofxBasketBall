@@ -15,32 +15,33 @@
 #include <string>
 using namespace std;
 
-class ofxArgs{
+class ofxArgs
+{
 private:
-	int argc;
-	vector<string> args;
-	map<string,string> opts;
-	
-	int strToInt(string value);
-	float strToFloat(string value);
-	
-public:
-	ofxArgs(int argc, char* argv[]);
-	
-	int getCount();
-	
-	bool contains(string key);
+    int argc;
+    vector<string> args;
+    map<string, string> opts;
 
-	float getFloat(string key);
-	int getInt(string key);
-	string getString(string key);
-	
-	float getFloat(int index);
-	int getInt(int index);
-	string getString(int index);
-	
-	void printArgs();
-	void printOpts();
+    int strToInt(string value);
+    float strToFloat(string value);
+
+public:
+    ofxArgs(int argc, char *argv[]);
+
+    int getCount();
+
+    bool contains(string key);
+
+    float getFloat(string key);
+    int getInt(string key);
+    string getString(string key);
+
+    float getFloat(int index);
+    int getInt(int index);
+    string getString(int index);
+
+    void printArgs();
+    void printOpts();
 };
 
 #endif

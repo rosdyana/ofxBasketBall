@@ -14,39 +14,42 @@ using namespace cv;
 class pbForeground
 {
 public:
-	void setup( int w, int h );
-	bool load( const string &fileName );
-	void save( const string &fileName );
-	void autoAdjust();
-	void autoAdjustDisable();
-	
-	void startLearn( float learnDelay, float learnDuration, const string &saveToFileName );			
-	void update( IplImage *inputRGBImage, IplImage *resultGrayImage );	
+    void setup(int w, int h);
+    bool load(const string &fileName);
+    void save(const string &fileName);
+    void autoAdjust();
+    void autoAdjustDisable();
 
-	bool learning();			
-	float learningProgress( bool truncate = true );
+    void startLearn(float learnDelay, float learnDuration, const string &saveToFileName);
+    void update(IplImage *inputRGBImage, IplImage *resultGrayImage);
 
-	IplImage *mask() { return _mask; }
-	void draw( float x, float y, float w = 0.0, float h = 0.0 );
+    bool learning();
+    float learningProgress(bool truncate = true);
+
+    IplImage *mask()
+    {
+        return _mask;
+    }
+    void draw(float x, float y, float w = 0.0, float h = 0.0);
 private:
-	bool _learning;
-	float _learningStart;
-	float _learningDuration;
-	int _w, _h; 
-	int _ch;
+    bool _learning;
+    float _learningStart;
+    float _learningDuration;
+    int _w, _h;
+    int _ch;
 
-	IplImage* _yuvImage;
-	vector<codeBook> _codeBook;
+    IplImage *_yuvImage;
+    vector<codeBook> _codeBook;
 
-	void drawCodeBook( IplImage *resultGrayImage );
-	
-	IplImage *_drawGrayImage;
-	IplImage *_mask;
+    void drawCodeBook(IplImage *resultGrayImage);
 
-	ofxCvGrayscaleImage _drawImage;
-	bool _drawImageReady;
+    IplImage *_drawGrayImage;
+    IplImage *_mask;
 
-	string _saveFileName;
+    ofxCvGrayscaleImage _drawImage;
+    bool _drawImageReady;
 
-	void clear();
+    string _saveFileName;
+
+    void clear();
 };

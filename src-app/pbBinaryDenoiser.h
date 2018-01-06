@@ -11,31 +11,34 @@ using namespace cv;
 class pbBinaryDenoiser
 {
 public:
-	void setup( int w, int h );
-	
-	void denoiseUsingMorphology( IplImage *mask, int openClose, int closeOpen );
+    void setup(int w, int h);
 
-	void denoiseUsingContours( IplImage *mask, int openClose, int closeOpen,				
-				float minPerimeter = 0.0, bool approx = true, double approxLevel = 0.0 );
+    void denoiseUsingMorphology(IplImage *mask, int openClose, int closeOpen);
 
-	void denoiseUsingFloodFill( IplImage *mask, int openClose, int closeOpen,
-		int blackAreaThreshold, int whiteAreaThreshold );
+    void denoiseUsingContours(IplImage *mask, int openClose, int closeOpen,
+                              float minPerimeter = 0.0, bool approx = true, double approxLevel = 0.0);
+
+    void denoiseUsingFloodFill(IplImage *mask, int openClose, int closeOpen,
+                               int blackAreaThreshold, int whiteAreaThreshold);
 
 
 
-	IplImage *mask() { return _mask; }
-	void draw( float x, float y, float w = 0.0, float h = 0.0 );
+    IplImage *mask()
+    {
+        return _mask;
+    }
+    void draw(float x, float y, float w = 0.0, float h = 0.0);
 
 private:
-	int _w, _h;
-	IplImage *_mask;
+    int _w, _h;
+    IplImage *_mask;
 
-	CvMemStorage* mem_storage;
-	CvSeq* contours;
+    CvMemStorage *mem_storage;
+    CvSeq *contours;
 
-	ofxCvGrayscaleImage _drawImage;
-	bool _drawImageReady;
+    ofxCvGrayscaleImage _drawImage;
+    bool _drawImageReady;
 
-	void morphology( int openClose, int closeOpen );
+    void morphology(int openClose, int closeOpen);
 };
 

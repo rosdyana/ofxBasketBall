@@ -2,18 +2,18 @@
 #include "pbFiles.h"
 
 //----------------------------------------------------------------------
-void pbSystem::criticalError( const string &message, int exitCode )
+void pbSystem::criticalError(const string &message, int exitCode)
 {
 
-	string s = "CRITICAL ERROR: " + message;
+    string s = "CRITICAL ERROR: " + message;
 
-	vector<string> list;
-	list.push_back( s );
-	pbFiles::writeStrings( list, ofToDataPath("_criticalError.txt") );
+    vector<string> list;
+    list.push_back(s);
+    pbFiles::writeStrings(list, ofToDataPath("_criticalError.txt"));
 
-	cout << s << endl;
-	ofSleepMillis( 5000 );
-	OF_EXIT_APP( exitCode );
+    cout << s << endl;
+    ofSleepMillis(5000);
+    OF_EXIT_APP(exitCode);
 }
 
 //----------------------------------------------------------------------

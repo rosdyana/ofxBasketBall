@@ -12,23 +12,23 @@
 #pragma resource "*.dfm"
 TAboutForm *AboutForm;
 //---------------------------------------------------------------------------
-__fastcall TAboutForm::TAboutForm(TComponent* Owner)
-	: TForm(Owner)
+__fastcall TAboutForm::TAboutForm(TComponent *Owner)
+    : TForm(Owner)
 {
 
-	productLabel->Caption = PRODUCT_TITLE;
-	versionLabel->Caption = String("Version ") + PRODUCT_VERSION;
-	descriptionLabel->Caption = PRODUCT_DESCRIPTION;
-	siteLabel->Caption = "www.playbat.net";
+    productLabel->Caption = PRODUCT_TITLE;
+    versionLabel->Caption = String("Version ") + PRODUCT_VERSION;
+    descriptionLabel->Caption = PRODUCT_DESCRIPTION;
+    siteLabel->Caption = "www.playbat.net";
 
 #ifdef PRODUCT_TYPE_TRIAL
-	trialLabel->Visible = true;
+    trialLabel->Visible = true;
 #endif
 }
 //---------------------------------------------------------------------------
 void __fastcall TAboutForm::siteLabelClick(TObject *Sender)
 {
-	DocUtils::browsePage( sharedPaths.siteUrl() );
+    DocUtils::browsePage(sharedPaths.siteUrl());
 }
 //---------------------------------------------------------------------------
 

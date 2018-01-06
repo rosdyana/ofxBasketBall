@@ -22,18 +22,25 @@ Version: 0.1
 #include "ofMain.h"
 #include "ofxVectorMath.h"
 
-class ofxIniSettings {
+class ofxIniSettings
+{
 public:
 
     ofxIniSettings() {}
-    ofxIniSettings(string filename) { load(filename); }
+    ofxIniSettings(string filename)
+    {
+        load(filename);
+    }
 
     //rick 15-1-2009! i changed clearFirst default to true
-    bool load(string filename, bool clearFirst=true); // you can call multiple times with different files, incremental
-    bool has(string key) { return keys[key]!=""; };
+    bool load(string filename, bool clearFirst = true); // you can call multiple times with different files, incremental
+    bool has(string key)
+    {
+        return keys[key] != "";
+    };
     void clear();
 
-    map<string,string> keys;
+    map<string, string> keys;
     string outputFilename;
 
     //getters
@@ -49,8 +56,14 @@ public:
     //setters
     void setString(string id, string value);
 
-    template <typename T> void set(string id, string key, T value) { set(id=="" ? key : (id+"."+key), value); } //returntype void
-    template <typename T> void set(string key, T value) { setString(key, ofToString(value)); } //returntype void
+    template <typename T> void set(string id, string key, T value)
+    {
+        set(id == "" ? key : (id + "." + key), value);    //returntype void
+    }
+    template <typename T> void set(string key, T value)
+    {
+        setString(key, ofToString(value));    //returntype void
+    }
 
 };
 

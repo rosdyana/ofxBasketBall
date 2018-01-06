@@ -20,55 +20,58 @@
 #include <iostream>
 
 
-class ofxFBOTexture : public ofTexture {
+class ofxFBOTexture : public ofTexture
+{
 public:
 
-        void allocate(int w, int h, bool autoClear);
+    void allocate(int w, int h, bool autoClear);
 
-		//возвращает изображение
-		void getImage( ofImage &image );
+    //возвращает изображение
+    void getImage(ofImage &image);
 
 
-        void swapIn();
-        void swapOut();
+    void swapIn();
+    void swapOut();
 
-        void setupScreenForMe();
-        void setupScreenForThem();
+    void setupScreenForMe();
+    void setupScreenForThem();
 
-        void begin() {
-				glMatrixMode(GL_PROJECTION);		//DENIS
-				glPushMatrix();
-				glMatrixMode(GL_MODELVIEW);
-				glPushMatrix();
+    void begin()
+    {
+        glMatrixMode(GL_PROJECTION);		//DENIS
+        glPushMatrix();
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
 
-                swapIn();
-                setupScreenForMe();
-        }
+        swapIn();
+        setupScreenForMe();
+    }
 
-        void end() {
-                swapOut();
-                setupScreenForThem();
+    void end()
+    {
+        swapOut();
+        setupScreenForThem();
 
-				glMatrixMode(GL_MODELVIEW);			//DENIS
-				glPopMatrix();
-				glMatrixMode(GL_PROJECTION);
-				glPopMatrix();
-				glMatrixMode(GL_MODELVIEW);
-        }
+        glMatrixMode(GL_MODELVIEW);			//DENIS
+        glPopMatrix();
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+        glMatrixMode(GL_MODELVIEW);
+    }
 
-        void clear();
-        void clear(float r, float g, float b, float a);
+    void clear();
+    void clear(float r, float g, float b, float a);
 
-        void bindAsTexture();
+    void bindAsTexture();
 
 
 protected:
-        bool            _isActive;
-        GLuint      fbo;                                 // Our handle to the FBO
-        GLuint      depthBuffer;                        // Our handle to the depth render buffer
-        bool        autoClear;
-        void        clean();
-        float       clearColor[4];
+    bool            _isActive;
+    GLuint      fbo;                                 // Our handle to the FBO
+    GLuint      depthBuffer;                        // Our handle to the depth render buffer
+    bool        autoClear;
+    void        clean();
+    float       clearColor[4];
 
 };
 

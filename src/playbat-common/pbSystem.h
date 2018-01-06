@@ -6,6 +6,6 @@
 class pbSystem
 {
 public:
-	static void criticalError( const string &message, int exitCode = -1 );
-	
+    static void criticalError(const string &message, int exitCode = -1);
+
 };

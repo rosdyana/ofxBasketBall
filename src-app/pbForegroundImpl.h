@@ -8,35 +8,35 @@
 #define pbForeground_CHANNELS ( 3 )
 
 typedef struct ce {
-	uchar learnHigh[pbForeground_CHANNELS]; //High side threshold for learning
-	uchar learnLow[pbForeground_CHANNELS]; //Low side threshold for learning
-	uchar max[pbForeground_CHANNELS]; //High side of box boundary
-	uchar min[pbForeground_CHANNELS]; //Low side of box boundary
-	float t_last_update; //Allow us to kill stale entries
-	float stale; //max negative run (longest period of inactivity)
+    uchar learnHigh[pbForeground_CHANNELS]; //High side threshold for learning
+    uchar learnLow[pbForeground_CHANNELS]; //Low side threshold for learning
+    uchar max[pbForeground_CHANNELS]; //High side of box boundary
+    uchar min[pbForeground_CHANNELS]; //Low side of box boundary
+    float t_last_update; //Allow us to kill stale entries
+    float stale; //max negative run (longest period of inactivity)
 } code_element;
 
 
 typedef struct code_book {
-	code_element **cb;
-	int numEntries;
-	float t; //count every access
+    code_element **cb;
+    int numEntries;
+    float t; //count every access
 } codeBook;
 
 
-void init_codebook( codeBook& c );
+void init_codebook(codeBook &c);
 //начальна€ очистка при создании
 
-void free_codebook( codeBook& c );
+void free_codebook(codeBook &c);
 
 
 int update_codebook(
-					uchar* p,
-					codeBook& c,
-					unsigned* cbBounds,
-					int numChannels,
-					float time
-					);
+    uchar *p,
+    codeBook &c,
+    unsigned *cbBounds,
+    int numChannels,
+    float time
+);
 // Updates the codebook entry with a new data point
 //
 // p Pointer to a YUV pixel
@@ -51,7 +51,7 @@ int update_codebook(
 // codebook index
 
 
-int clear_stale_entries(codeBook &c, float staleDuration );
+int clear_stale_entries(codeBook &c, float staleDuration);
 // During learning, after youТve learned for some period of time,
 // periodically call this to clear out stale codebook entries
 //
@@ -62,12 +62,12 @@ int clear_stale_entries(codeBook &c, float staleDuration );
 //
 
 uchar background_diff(
-					  uchar* p,
-					  codeBook& c,
-					  int numChannels,
-					  int* minMod,
-					  int* maxMod
-					  );
+    uchar *p,
+    codeBook &c,
+    int numChannels,
+    int *minMod,
+    int *maxMod
+);
 
 // Given a pixel and a codebook, determine if the pixel is
 // covered by the codebook

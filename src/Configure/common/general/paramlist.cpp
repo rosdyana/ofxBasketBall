@@ -6,31 +6,30 @@
 
 bool ParamList::loadBinary()
 {
-	bool res = true;
-	
-	_values.clear();
+    bool res = true;
 
-	FILE *f = fopen(fileName().c_str(), "rb" );
-	if ( f && !feof( f ) ) {
-		int n;
-		fread(&n, sizeof( n ), 1, f);
+    _values.clear();
 
-		for (int i=0; i<n && !feof(f); i++) {
-			string key = readChunk( f );
-			string value = readChunk( f );
-			setString( key, value );
-		}
+    FILE *f = fopen(fileName().c_str(), "rb");
+    if (f && !feof(f)) {
+        int n;
+        fread(&n, sizeof(n), 1, f);
 
-		//если feof раньше времени - то ошибка
-		//TODO
+        for (int i = 0; i < n && !feof(f); i++) {
+            string key = readChunk(f);
+            string value = readChunk(f);
+            setString(key, value);
+        }
 
-		fclose( f );
-	}
-	else {
-		//ошибка открытия файла
-		res = false;
-	}
-	return res;
+        //если feof раньше времени - то ошибка
+        //TODO
+
+        fclose(f);
+    } else {
+        //ошибка открытия файла
+        res = false;
+    }
+    return res;
 }
 
 //---------------------------------------------------------------------------
@@ -38,28 +37,27 @@ bool ParamList::loadBinary()
 
 bool ParamList::saveBinary()
 {
-	bool res = true;
+    bool res = true;
 
-	FILE *f = fopen(fileName().c_str(), "wb" );
-	if ( f ) {
-		int n = _values.size();
-		fwrite( &n, sizeof( n ), 1, f );
+    FILE *f = fopen(fileName().c_str(), "wb");
+    if (f) {
+        int n = _values.size();
+        fwrite(&n, sizeof(n), 1, f);
 
-		for (StringStringMap::const_iterator iter = _values.begin();
-			iter != _values.end(); iter++) {
-			string key = iter->first;
-			string value = iter->second;
-			writeChunk( f, key );
-			writeChunk( f, value );
-		}
+        for (StringStringMap::const_iterator iter = _values.begin();
+                iter != _values.end(); iter++) {
+            string key = iter->first;
+            string value = iter->second;
+            writeChunk(f, key);
+            writeChunk(f, value);
+        }
 
-		fclose( f );
-	}
-	else {
-		//ошибка открытия файла
-		res = false;
-	}
-	return res;
+        fclose(f);
+    } else {
+        //ошибка открытия файла
+        res = false;
+    }
+    return res;
 
 }
 
@@ -68,13 +66,13 @@ bool ParamList::saveBinary()
 
 bool ParamList::loadText()
 {
-	clear();
-  /*	ifstream in;
-	in.open(filename);
-	string key, value;
-	in.getline(key);
-	in.getline(value);*/
-	return true;
+    clear();
+    /*	ifstream in;
+    in.open(filename);
+    string key, value;
+    in.getline(key);
+    in.getline(value);*/
+    return true;
 }
 
 //---------------------------------------------------------------------------
@@ -82,21 +80,21 @@ bool ParamList::loadText()
 
 bool ParamList::saveText()
 {
-/*	ofstream out;
-	out.open(filename);
-	out<<myData;
-*/
-	return true;
+    /*	ofstream out;
+    	out.open(filename);
+    	out<<myData;
+    */
+    return true;
 
-	/*vector<string> keys = getKeys();
-	for (StringStringMap::const_iterator iter = _values.begin();
-		iter != _values.end(); iter++) {
-		string key = iter->first;
-		//string value = iter->second;
-		keys.push_back( key );
-	}
-	//keys.sort();
-	*/
+    /*vector<string> keys = getKeys();
+    for (StringStringMap::const_iterator iter = _values.begin();
+    	iter != _values.end(); iter++) {
+    	string key = iter->first;
+    	//string value = iter->second;
+    	keys.push_back( key );
+    }
+    //keys.sort();
+    */
 }
 
 //---------------------------------------------------------------------------
@@ -104,13 +102,13 @@ bool ParamList::saveText()
 
 vector<string> ParamList::keys()
 {
-	vector<string> _keys;
-	for (StringStringMap::const_iterator iter = _values.begin();
-		iter != _values.end(); iter++) {
-		string key = iter->first;
-		_keys.push_back( key );
-	}
-	return _keys;
+    vector<string> _keys;
+    for (StringStringMap::const_iterator iter = _values.begin();
+            iter != _values.end(); iter++) {
+        string key = iter->first;
+        _keys.push_back(key);
+    }
+    return _keys;
 }
 
 //---------------------------------------------------------------------------

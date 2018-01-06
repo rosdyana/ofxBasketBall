@@ -8,13 +8,14 @@ using namespace std;
 
 //Открытие документов, страниц
 
-class DocUtils {
+class DocUtils
+{
 public:
-	static void browsePage( const string &url );   	//понимает и email
-	static void openFile( const string &fileName );
+    static void browsePage(const string &url);   	//понимает и email
+    static void openFile(const string &fileName);
 
 private:
-	static void openDoc( const string &url );
+    static void openDoc(const string &url);
 
 };
 

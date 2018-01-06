@@ -13,17 +13,17 @@
 class TAboutForm : public TForm
 {
 __published:	// IDE-managed Components
-	TLabel *versionLabel;
-	TButton *Button1;
-	TLabel *siteLabel;
-	TLabel *productLabel;
-	TLabel *trialLabel;
-	TLabel *descriptionLabel;
-	TImage *Image1;
-	void __fastcall siteLabelClick(TObject *Sender);
+    TLabel *versionLabel;
+    TButton *Button1;
+    TLabel *siteLabel;
+    TLabel *productLabel;
+    TLabel *trialLabel;
+    TLabel *descriptionLabel;
+    TImage *Image1;
+    void __fastcall siteLabelClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
-	__fastcall TAboutForm(TComponent* Owner);
+    __fastcall TAboutForm(TComponent *Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TAboutForm *AboutForm;

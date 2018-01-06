@@ -11,24 +11,27 @@ using namespace cv;
 class pbMaskStabilizer
 {
 public:
-	pbMaskStabilizer(void);
-	~pbMaskStabilizer(void);
-	void setup( float historySec );	//сколько должна стоять точка, чтоб ее считать сработавшей
+    pbMaskStabilizer(void);
+    ~pbMaskStabilizer(void);
+    void setup(float historySec);	//сколько должна стоять точка, чтоб ее считать сработавшей
 
-	void update( float dt, const Mat &mask );
-	Mat &mask();
+    void update(float dt, const Mat &mask);
+    Mat &mask();
 
-	bool inited() { return _inited; }
+    bool inited()
+    {
+        return _inited;
+    }
 
 private:
-	float kHistorySec;
-	Mat _history;
-	cv::Size _size;
+    float kHistorySec;
+    Mat _history;
+    cv::Size _size;
 
-	Mat _tempMaskFloat;
-	Mat _maskResult;
+    Mat _tempMaskFloat;
+    Mat _maskResult;
 
-	bool _inited;
-	void init( const Mat &mask );
+    bool _inited;
+    void init(const Mat &mask);
 
 };

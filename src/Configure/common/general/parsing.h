@@ -7,13 +7,14 @@
 #include <string>
 using namespace std;
 
-//Модуль парсинга строк 
+//Модуль парсинга строк
 
-class Parsing {
+class Parsing
+{
 public:
 
-	//разбить строку на подстроки, используя разделитель delim
-	static vector<string> split( const string &str, const string &delim );
+    //разбить строку на подстроки, используя разделитель delim
+    static vector<string> split(const string &str, const string &delim);
 
 
 };

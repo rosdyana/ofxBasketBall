@@ -16,72 +16,89 @@ using namespace std;
 class pbCameraCalibrate
 {
 public:
-	//Статические члены - можно обойтись ими 
+    //Статические члены - можно обойтись ими
 
-	//Построение матрицы преобразования, 4 точки по часовой стрелке
-	template< class PointClass >
-	static Mat getTransform( vector<PointClass> &curve4, int outW, int outH ) {
-		
-		const int K = 4;
-		cv::Point2f src[K];
-		cv::Point2f dst[K];
+    //Построение матрицы преобразования, 4 точки по часовой стрелке
+    template< class PointClass >
+    static Mat getTransform(vector<PointClass> &curve4, int outW, int outH)
+    {
 
-		src[ 0 ] = cv::Point2f( 0, 0 );
-		src[ 1 ] = cv::Point2f( outW, 0 );
-		src[ 2 ] = cv::Point2f( outW, outH );
-		src[ 3 ] = cv::Point2f( 0, outH );
+        const int K = 4;
+        cv::Point2f src[K];
+        cv::Point2f dst[K];
 
-		for (int i=0; i<K; i++) {
-			dst[ i ] = cv::Point2f( curve4[ i ].x, curve4[ i ].y );
-		}
+        src[ 0 ] = cv::Point2f(0, 0);
+        src[ 1 ] = cv::Point2f(outW, 0);
+        src[ 2 ] = cv::Point2f(outW, outH);
+        src[ 3 ] = cv::Point2f(0, outH);
 
-		return getPerspectiveTransform( dst, src );
-	}
+        for (int i = 0; i < K; i++) {
+            dst[ i ] = cv::Point2f(curve4[ i ].x, curve4[ i ].y);
+        }
 
-	//Преобразование изображения
-	static void warp( const Mat &in, Mat &out, const Mat &transform, int outW, int outH ) {
-		cv::warpPerspective( in, out, transform, cv::Size( outW, outH ), INTER_LINEAR );
-	}
+        return getPerspectiveTransform(dst, src);
+    }
 
-	//Запись калиброванных точек
+    //Преобразование изображения
+    static void warp(const Mat &in, Mat &out, const Mat &transform, int outW, int outH)
+    {
+        cv::warpPerspective(in, out, transform, cv::Size(outW, outH), INTER_LINEAR);
+    }
+
+    //Запись калиброванных точек
 
 
 public:
-	//inoutFileName - если не пустая строка, то оттуда считывается и записывается автоматически
-	//outW, outH - размеры выходной картинки, если 0 - берутся из первого кадра
-	//но если автозагрузка - они должны быть установлены сразу 
-	void setup( int outW, int outH, const string &inoutFileName = "" );
+    //inoutFileName - если не пустая строка, то оттуда считывается и записывается автоматически
+    //outW, outH - размеры выходной картинки, если 0 - берутся из первого кадра
+    //но если автозагрузка - они должны быть установлены сразу
+    void setup(int outW, int outH, const string &inoutFileName = "");
 
-	void resetPoints();						//сброс точек, на всю картинку
-	bool load( const string &fileName );
-	bool save( const string &fileName );
-	void setAutosave( const string &fileName );	//включить режим автосохранения. Если пустая строка - то выключить
-	
-	void transformImage( const Mat &image, Mat &imageOut );
-	void transformPixels( vector<Point2f> &in, vector<Point2f> &out );
+    void resetPoints();						//сброс точек, на всю картинку
+    bool load(const string &fileName);
+    bool save(const string &fileName);
+    void setAutosave(const string &fileName);	//включить режим автосохранения. Если пустая строка - то выключить
 
-	void draw( float x, float y, float w, float h /*, const ofPoint &mousePos*/ );
+    void transformImage(const Mat &image, Mat &imageOut);
+    void transformPixels(vector<Point2f> &in, vector<Point2f> &out);
 
-	bool enabled() { return _enabled; }	//если выключен - то просто исходную картинку растягивает в нужный размер
-	void setEnabled( bool enabled ) { _enabled = enabled; }
-	
-	//Установка данных
-	//4 точки, обход точек по часовой стрелке	
-	void setPoints( const vector<ofPoint> &p );
-	const vector<ofPoint> &points() { return _points; }	
+    void draw(float x, float y, float w, float h /*, const ofPoint &mousePos*/);
 
-	int width() { return _outW; }
-	int height() { return _outH; }
+    bool enabled()
+    {
+        return _enabled;    //если выключен - то просто исходную картинку растягивает в нужный размер
+    }
+    void setEnabled(bool enabled)
+    {
+        _enabled = enabled;
+    }
 
-private:	
-	static const int K = 4;							//число точек для калибровки
-	bool _enabled;
-	int _outW, _outH; 	
-	vector<ofPoint> _points;
+    //Установка данных
+    //4 точки, обход точек по часовой стрелке
+    void setPoints(const vector<ofPoint> &p);
+    const vector<ofPoint> &points()
+    {
+        return _points;
+    }
 
-	Mat _transform;		//матрица преобразования
+    int width()
+    {
+        return _outW;
+    }
+    int height()
+    {
+        return _outH;
+    }
 
-	//автосохранение калибровки
-	string _autosaveFileName;
+private:
+    static const int K = 4;							//число точек для калибровки
+    bool _enabled;
+    int _outW, _outH;
+    vector<ofPoint> _points;
+
+    Mat _transform;		//матрица преобразования
+
+    //автосохранение калибровки
+    string _autosaveFileName;
 
 };

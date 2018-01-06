@@ -12,146 +12,245 @@
 class RunInfo
 {
 public:
-	RunInfo();
+    RunInfo();
 
-	void setup( int argc, char *argv[], ofAppGlutWindow *window );	
-	void setupInSetup();			
-	
-	int readInt( const string &key, int defaultValue );
-	float readFloat( const string &key, float defaultValue );
-	void writeInt( const string &key, int value );
-	void writeFloat( const string &key, int value );
-	
+    void setup(int argc, char *argv[], ofAppGlutWindow *window);
+    void setupInSetup();
 
-	ofxArgs &args() { return _args; }	
-	//ofAppGlutWindow &window() { return *_pWindow; }	
-	void exitApp();						
-	void consoleShow();					
-	void consoleHide();					
-	void windowShow();					
-	void windowHide();					
-
-	void updateBegin();
-	void update();	
-
-	void drawBegin( int factW = 0, int factH = 0 );	
-
-	void drawEnd();	
-
-	void setPrintFps( bool enable ) { _printFps = enable; }
-	bool  printFps()			{ return _printFps; }
-
-	int fullScreen() { return _fullScreen; }	
-	int screenWidth()	{ return _w; }
-	int screenHeight()	{ return _h; }
-
-	float screenPhysW() { return _screenPhysW; }	
-	float screenPhysH() { return _screenPhysH; }	
-
-	int renderWidth()	{ return _renderW; }
-	int renderHeight()	{ return _renderH; }
-	int renderAngle()	{ return _renderAngle; }
+    int readInt(const string &key, int defaultValue);
+    float readFloat(const string &key, float defaultValue);
+    void writeInt(const string &key, int value);
+    void writeFloat(const string &key, int value);
 
 
-	pbScreenFormat screenFormat() { return _screenFormat; }
+    ofxArgs &args()
+    {
+        return _args;
+    }
+    //ofAppGlutWindow &window() { return *_pWindow; }
+    void exitApp();
+    void consoleShow();
+    void consoleHide();
+    void windowShow();
+    void windowHide();
+
+    void updateBegin();
+    void update();
+
+    void drawBegin(int factW = 0, int factH = 0);
+
+    void drawEnd();
+
+    void setPrintFps(bool enable)
+    {
+        _printFps = enable;
+    }
+    bool  printFps()
+    {
+        return _printFps;
+    }
+
+    int fullScreen()
+    {
+        return _fullScreen;
+    }
+    int screenWidth()
+    {
+        return _w;
+    }
+    int screenHeight()
+    {
+        return _h;
+    }
+
+    float screenPhysW()
+    {
+        return _screenPhysW;
+    }
+    float screenPhysH()
+    {
+        return _screenPhysH;
+    }
+
+    int renderWidth()
+    {
+        return _renderW;
+    }
+    int renderHeight()
+    {
+        return _renderH;
+    }
+    int renderAngle()
+    {
+        return _renderAngle;
+    }
 
 
-	ofxVec2f windowToScreen(  const ofxVec2f &p, float internalW, float internalH );	
-	ofxVec2f windowToCamera( const ofxVec2f &p, float internalW, float internalH );	
+    pbScreenFormat screenFormat()
+    {
+        return _screenFormat;
+    }
 
 
-	int mouseShow()	{ return _mouseShow; }		
+    ofxVec2f windowToScreen(const ofxVec2f &p, float internalW, float internalH);
+    ofxVec2f windowToCamera(const ofxVec2f &p, float internalW, float internalH);
 
-	float soundVolume() { return _soundVolume; }	
 
-	int cameraDevice()	{ return _cameraDevice;	}	
-	int cameraDevice2()	{ return _cameraDevice2;	}	
-	bool cameraPS3Eye()	{ return _cameraPS3Eye;    } 
-	bool cameraKinect()	{ return _cameraKinect;    }
+    int mouseShow()
+    {
+        return _mouseShow;
+    }
 
-	int cameraFrameRate()	{ return _cameraFrameRate; }
-	int cameraMirror()	{ return _cameraMirror; }	
-	int cameraPhysW()	{ return _cameraPhysW; }	
-	int cameraPhysH()	{ return _cameraPhysH; }
-	int cameraGrabW()	{ return _cameraGrabW; }	
-	int cameraGrabH()	{ return _cameraGrabH; }
-	int cameraProcessW()	{ return _cameraProcessW; }	
-	int cameraProcessH()	{ return _cameraProcessH; }
-	int cameraOptFlowW()	{ return _cameraOptFlowW; }	
-	int cameraOptFlowH()	{ return _cameraOptFlowH; }
+    float soundVolume()
+    {
+        return _soundVolume;
+    }
 
-	float fadeDuration()	{ return _fadeDuration;	}	
+    int cameraDevice()
+    {
+        return _cameraDevice;
+    }
+    int cameraDevice2()
+    {
+        return _cameraDevice2;
+    }
+    bool cameraPS3Eye()
+    {
+        return _cameraPS3Eye;
+    }
+    bool cameraKinect()
+    {
+        return _cameraKinect;
+    }
 
-	float introDuration()	{ return _introDuration; }	
-	string introImageFile()		{ return _introImageFile; }		
+    int cameraFrameRate()
+    {
+        return _cameraFrameRate;
+    }
+    int cameraMirror()
+    {
+        return _cameraMirror;
+    }
+    int cameraPhysW()
+    {
+        return _cameraPhysW;
+    }
+    int cameraPhysH()
+    {
+        return _cameraPhysH;
+    }
+    int cameraGrabW()
+    {
+        return _cameraGrabW;
+    }
+    int cameraGrabH()
+    {
+        return _cameraGrabH;
+    }
+    int cameraProcessW()
+    {
+        return _cameraProcessW;
+    }
+    int cameraProcessH()
+    {
+        return _cameraProcessH;
+    }
+    int cameraOptFlowW()
+    {
+        return _cameraOptFlowW;
+    }
+    int cameraOptFlowH()
+    {
+        return _cameraOptFlowH;
+    }
 
-	bool durationControl()	{ return _durationControl; }	
-	void setDurationControl( bool durationControl )	{	_durationControl = durationControl; }
+    float fadeDuration()
+    {
+        return _fadeDuration;
+    }
 
-	static const int ResizeModeCrop = 0;
-	static const int ResizeModeFit = 1;
+    float introDuration()
+    {
+        return _introDuration;
+    }
+    string introImageFile()
+    {
+        return _introImageFile;
+    }
+
+    bool durationControl()
+    {
+        return _durationControl;
+    }
+    void setDurationControl(bool durationControl)
+    {
+        _durationControl = durationControl;
+    }
+
+    static const int ResizeModeCrop = 0;
+    static const int ResizeModeFit = 1;
 
 
 private:
-	ofxIniSettings _defaultIni, _userIni;
+    ofxIniSettings _defaultIni, _userIni;
 
-	ofxArgs _args;					
-	ofAppGlutWindow *_pWindow;		
+    ofxArgs _args;
+    ofAppGlutWindow *_pWindow;
 
-	int _w;
-	int _h;
-	float _screenPhysW;
-	float _screenPhysH;
+    int _w;
+    int _h;
+    float _screenPhysW;
+    float _screenPhysH;
 
-	int _rotate;		
-	int _fullScreen;		
-	int _mirror;		
-	float	_fadeDuration;	
+    int _rotate;
+    int _fullScreen;
+    int _mirror;
+    float	_fadeDuration;
 
-	float _introDuration; 	
-	string _introImageFile;		
-	ofImage _introImage;		
-
-
-	int _resizeMode;	//0 - crop, 1 - fit
-
-	int _renderW;
-	int _renderH;
-	int _renderAngle;
-	pbScreenFormat _screenFormat;
-
-	float _runDurationSec;		
+    float _introDuration;
+    string _introImageFile;
+    ofImage _introImage;
 
 
-	int _mouseShow;
+    int _resizeMode;	//0 - crop, 1 - fit
+
+    int _renderW;
+    int _renderH;
+    int _renderAngle;
+    pbScreenFormat _screenFormat;
+
+    float _runDurationSec;
 
 
-	float _soundVolume;	
+    int _mouseShow;
 
 
-	int _cameraDevice;
-	int _cameraDevice2;
-	int _cameraPS3Eye;
-	int _cameraKinect;
-	int _cameraFrameRate;
-	int _cameraMirror;
-	int _cameraPhysW;
-	int _cameraPhysH;
-	int _cameraGrabW;
-	int _cameraGrabH;
-	int _cameraProcessW;
-	int _cameraProcessH;
-	int _cameraOptFlowW;
-	int _cameraOptFlowH;
+    float _soundVolume;
 
-	//
-	bool _durationControl;
 
-	bool _printFps;
-	void doPrintFps();	
+    int _cameraDevice;
+    int _cameraDevice2;
+    int _cameraPS3Eye;
+    int _cameraKinect;
+    int _cameraFrameRate;
+    int _cameraMirror;
+    int _cameraPhysW;
+    int _cameraPhysH;
+    int _cameraGrabW;
+    int _cameraGrabH;
+    int _cameraProcessW;
+    int _cameraProcessH;
+    int _cameraOptFlowW;
+    int _cameraOptFlowH;
 
-	float _updateStart;
-	float _updateEnd;
+    //
+    bool _durationControl;
+
+    bool _printFps;
+    void doPrintFps();
+
+    float _updateStart;
+    float _updateEnd;
 
 };
 

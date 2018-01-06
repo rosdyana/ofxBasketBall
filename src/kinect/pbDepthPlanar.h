@@ -10,79 +10,82 @@ using namespace cv;
 
 //Параметры
 struct pbDepthPlanarParam {
-	int w, h;					//размеры картинки, в которую преобразовывать
-	float depthLow, depthHigh;	//пороги обрезания
-	int depthErode;				//число эрозий для удаления шумов
-	int filterMinCount;			//количество точек для фильтрации по размеру
+    int w, h;					//размеры картинки, в которую преобразовывать
+    float depthLow, depthHigh;	//пороги обрезания
+    int depthErode;				//число эрозий для удаления шумов
+    int filterMinCount;			//количество точек для фильтрации по размеру
 
 };
 
 class pbDepthPlanar
 {
 public:
-	pbDepthPlanar(void);
-	~pbDepthPlanar(void);
+    pbDepthPlanar(void);
+    ~pbDepthPlanar(void);
 
-	void setup( const string &paramFileName, const string &calibrFileName );
-	void update( const Mat &depth16 );
+    void setup(const string &paramFileName, const string &calibrFileName);
+    void update(const Mat &depth16);
 
-	
-	void lock();			//для многопоточной ситуации
-	void unlock();
 
-	const Mat &mask();			//результирующая маска
+    void lock();			//для многопоточной ситуации
+    void unlock();
 
-	vector<ofPoint> getWarpPoints();		//точки калибровки
-	void setWarpPoints( vector<ofPoint> &p );
+    const Mat &mask();			//результирующая маска
 
-	pbDepthPlanarParam getParams();			//параметры
-	void setParams( pbDepthPlanarParam &param );
+    vector<ofPoint> getWarpPoints();		//точки калибровки
+    void setWarpPoints(vector<ofPoint> &p);
 
-	void learnBackground();	//выучить фон
-	void resetCorners();	//сбросить углы
+    pbDepthPlanarParam getParams();			//параметры
+    void setParams(pbDepthPlanarParam &param);
 
-	pbCameraCalibrate &calibrator() { return _calibrDepth; }
+    void learnBackground();	//выучить фон
+    void resetCorners();	//сбросить углы
+
+    pbCameraCalibrate &calibrator()
+    {
+        return _calibrDepth;
+    }
 private:
 
-	//мютекс
-	#ifdef TARGET_WIN32
-			CRITICAL_SECTION  critSec;  	//same as a mutex
-	#else
-			pthread_mutex_t  myMutex;
-	#endif
+    //мютекс
+#ifdef TARGET_WIN32
+    CRITICAL_SECTION  critSec;  	//same as a mutex
+#else
+    pthread_mutex_t  myMutex;
+#endif
 
-	//параметры
-	pbDepthPlanarParam _param;
-	pbCameraCalibrate _calibrDepth;
+    //параметры
+    pbDepthPlanarParam _param;
+    pbCameraCalibrate _calibrDepth;
 
-	void loadParam();
-	void saveParam();
+    void loadParam();
+    void saveParam();
 
 
-	//Изображения
-	Mat _depthSmall16;
-	Mat _depthSmallF;
-	Mat _depthWarped;
-	Mat _back;
-	Mat _backWarped;
+    //Изображения
+    Mat _depthSmall16;
+    Mat _depthSmallF;
+    Mat _depthWarped;
+    Mat _back;
+    Mat _backWarped;
 
-	Mat _tempDiff;
-	Mat _tempMask;
-	Mat _mask;
-	
-	float _startTime;
-	bool _learnBackground;			//хотим запомнить фон
+    Mat _tempDiff;
+    Mat _tempMask;
+    Mat _mask;
 
-	//удаление шумов из маски
-	static void maskDenoiseFloodFill( const Mat &mask, Mat &maskOut, int minCount, int maxCount );
+    float _startTime;
+    bool _learnBackground;			//хотим запомнить фон
 
-	//построение маски
-	static void makeMask( const Mat &diff, Mat &tempMask, Mat &maskOut, 
-		const pbDepthPlanarParam &param,
-		bool debugDraw );
+    //удаление шумов из маски
+    static void maskDenoiseFloodFill(const Mat &mask, Mat &maskOut, int minCount, int maxCount);
 
-	//перевычислить фон при смене калибровки
-	void recalcBackground();
+    //построение маски
+    static void makeMask(const Mat &diff, Mat &tempMask, Mat &maskOut,
+                         const pbDepthPlanarParam &param,
+                         bool debugDraw);
+
+    //перевычислить фон при смене калибровки
+    void recalcBackground();
 
 
 };

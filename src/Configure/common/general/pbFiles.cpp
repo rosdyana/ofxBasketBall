@@ -2,12 +2,12 @@
 
 
 //--------------------------------------------------------------------------------
-bool pbFiles::fileExists( const string &fileName )
+bool pbFiles::fileExists(const string &fileName)
 {
-	ifstream inp;
-	inp.open(fileName.c_str(), ifstream::in);
-	inp.close();
-	return !inp.fail();
+    ifstream inp;
+    inp.open(fileName.c_str(), ifstream::in);
+    inp.close();
+    return !inp.fail();
 }
 
 //--------------------------------------------------------------------------------
@@ -22,17 +22,17 @@ bool pbFiles::fileExists( const string &fileName )
 }*/
 
 //--------------------------------------------------------------------------------
-vector<string> pbFiles::readStrings( const string &fileName )
+vector<string> pbFiles::readStrings(const string &fileName)
 {
-	vector<string> list;
-	if ( fileExists( fileName ) ) {
-		ifstream f(fileName.c_str(),ios::in);
-		string line;
-		while (getline(f,line)) {
-			list.push_back( line );
-		}
-	}                              
-	return list;                   
+    vector<string> list;
+    if (fileExists(fileName)) {
+        ifstream f(fileName.c_str(), ios::in);
+        string line;
+        while (getline(f, line)) {
+            list.push_back(line);
+        }
+    }
+    return list;
 }
 
 //--------------------------------------------------------------------------------

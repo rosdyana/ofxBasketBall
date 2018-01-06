@@ -10,11 +10,12 @@
 using namespace std;
 
 
-class pbFiles {
+class pbFiles
+{
 public:
-	static bool fileExists( const string &fileName );
-	//static int fileSize(  const string &fileName );
-	static vector<string> readStrings( const string &fileName );
+    static bool fileExists(const string &fileName);
+    //static int fileSize(  const string &fileName );
+    static vector<string> readStrings(const string &fileName);
 
 };
 

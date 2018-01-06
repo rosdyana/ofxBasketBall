@@ -16,112 +16,121 @@ using namespace cv;
 
 //Параметры
 struct pbDepthPlanar3DParam {
-	int w, h;					//размеры картинки, в которую преобразовывать
+    int w, h;					//размеры картинки, в которую преобразовывать
 
-	int doBackProjection;		//делать возврат точек на пол - замедляет работу, но повышает точность. При калибровке - выключается.
-	float depthCalibrLow, depthCalibrHigh;	//пороги обрезания грубые - при калибровке
-	float depthRawLow, depthRawHigh;	//пороги обрезания грубые - при первом проходе при использовании BackProjection
-	float depthLow, depthHigh;	//пороги обрезания точные
-	
-	int kWarpedThreshold;		//Порог обработки растянутого warp-изображения
-	int depthErode;				//число эрозий для удаления шумов
-	int depthDilate;				//число эрозий для удаления шумов
-	int blobMinArea;			//количество точек для фильтрации по размеру
+    int doBackProjection;		//делать возврат точек на пол - замедляет работу, но повышает точность. При калибровке - выключается.
+    float depthCalibrLow, depthCalibrHigh;	//пороги обрезания грубые - при калибровке
+    float depthRawLow, depthRawHigh;	//пороги обрезания грубые - при первом проходе при использовании BackProjection
+    float depthLow, depthHigh;	//пороги обрезания точные
 
-	float backgroundLearnTime;		//параметр времени запоминания фона
+    int kWarpedThreshold;		//Порог обработки растянутого warp-изображения
+    int depthErode;				//число эрозий для удаления шумов
+    int depthDilate;				//число эрозий для удаления шумов
+    int blobMinArea;			//количество точек для фильтрации по размеру
+
+    float backgroundLearnTime;		//параметр времени запоминания фона
 
 
-	void load( const string &fileName );
-	void save( const string &fileName );
+    void load(const string &fileName);
+    void save(const string &fileName);
 
 };
 
 class pbDepthPlanar3D
 {
 public:
-	pbDepthPlanar3D(void);
-	~pbDepthPlanar3D(void);
+    pbDepthPlanar3D(void);
+    ~pbDepthPlanar3D(void);
 
-	void setup( const string &paramFileName, const string &calibrFileName );
-	void update( const Mat &depth16, bool calibrateMode );
+    void setup(const string &paramFileName, const string &calibrFileName);
+    void update(const Mat &depth16, bool calibrateMode);
 
-	void loadDefaultParam();
-	void saveDefaultParam();
-	
-	void lock();			//для многопоточной ситуации
-	void unlock();
+    void loadDefaultParam();
+    void saveDefaultParam();
 
-	const Mat &mask();			//результирующая маска
+    void lock();			//для многопоточной ситуации
+    void unlock();
 
-	vector<ofPoint> getWarpPoints();		//точки калибровки
-	void setWarpPoints( vector<ofPoint> &p );
+    const Mat &mask();			//результирующая маска
 
-	void setBackProjection( bool value ) { _param.doBackProjection = value; };		//переключения режима обратной проекции с компенсацией пола
+    vector<ofPoint> getWarpPoints();		//точки калибровки
+    void setWarpPoints(vector<ofPoint> &p);
 
-	pbDepthPlanar3DParam getParams();			//параметры
-	void setParams( pbDepthPlanar3DParam &param );
+    void setBackProjection(bool value)
+    {
+        _param.doBackProjection = value;
+    };		//переключения режима обратной проекции с компенсацией пола
 
-	void learnBackground();	//выучить фон
-	bool learningBackground() { return _learnBackgroundTime > 0; }	//идет ли обучение фона
-	void resetCorners();	//сбросить углы
+    pbDepthPlanar3DParam getParams();			//параметры
+    void setParams(pbDepthPlanar3DParam &param);
 
-	pbCameraCalibrate &calibrator() { return _calibrDepth; }
+    void learnBackground();	//выучить фон
+    bool learningBackground()
+    {
+        return _learnBackgroundTime > 0;    //идет ли обучение фона
+    }
+    void resetCorners();	//сбросить углы
+
+    pbCameraCalibrate &calibrator()
+    {
+        return _calibrDepth;
+    }
 
 private:
 
-	//мютекс
-	#ifdef TARGET_WIN32
-			CRITICAL_SECTION  critSec;  	//same as a mutex
-	#else
-			pthread_mutex_t  myMutex;
-	#endif
+    //мютекс
+#ifdef TARGET_WIN32
+    CRITICAL_SECTION  critSec;  	//same as a mutex
+#else
+    pthread_mutex_t  myMutex;
+#endif
 
-	//параметры
-	pbDepthPlanar3DParam _param;
-	pbCameraCalibrate _calibrDepth;
+    //параметры
+    pbDepthPlanar3DParam _param;
+    pbCameraCalibrate _calibrDepth;
 
-	void loadParam();
-	void saveParam();
-
-
-
-	//Изображения
-	int _cameraW, _cameraH;
-	Mat _depthSmall;
-	Mat _back;
-
-	ofxVec3f _backN;
-	float _backOriginAxe;
+    void loadParam();
+    void saveParam();
 
 
-	Mat _tempDiff;
-	Mat _tempMask;
 
-	Mat _preMask;	
+    //Изображения
+    int _cameraW, _cameraH;
+    Mat _depthSmall;
+    Mat _back;
 
-	vector<XnPoint3D> _pScreen, _pWorld, _pWorldFloor, _pScreenFloor;	//точки в экранных и мировых координатах
-	vector<Point2f> _pFloor, _pGame;			//напольные и игровые координаты
-	Mat _tempMaskBackProj;
+    ofxVec3f _backN;
+    float _backOriginAxe;
 
-	Mat _tempMaskFiltration;
-	Mat _mask;
-	
-	float _startTime;
-	float _time;
-	bool _learnBackgroundAtStart;	//надо учить фон при старте
-	bool _learnBackground;			//хотим запомнить фон
-	float _learnBackgroundTime;		//сколько идет запоминание, когда будет 0 - выключить
 
-	//перевычислить фон при смене калибровки
-	void recalcBackground();
+    Mat _tempDiff;
+    Mat _tempMask;
 
-	//расчет обратной проекции для более точного позиционирование ноги
-	void backProjection( Mat &inputMask, Mat &inputDepth, Mat &maskOut );
+    Mat _preMask;
 
-	//Обработка маски
-	void maskDenoiseFloodFill( const Mat &mask, Mat &maskOut, int minCount, int maxCount );
-	void maskFilter( const Mat &mask, Mat &maskOut, Mat &maskTemp );
+    vector<XnPoint3D> _pScreen, _pWorld, _pWorldFloor, _pScreenFloor;	//точки в экранных и мировых координатах
+    vector<Point2f> _pFloor, _pGame;			//напольные и игровые координаты
+    Mat _tempMaskBackProj;
 
-	Mat _erodeMask, _dilateMask;
+    Mat _tempMaskFiltration;
+    Mat _mask;
+
+    float _startTime;
+    float _time;
+    bool _learnBackgroundAtStart;	//надо учить фон при старте
+    bool _learnBackground;			//хотим запомнить фон
+    float _learnBackgroundTime;		//сколько идет запоминание, когда будет 0 - выключить
+
+    //перевычислить фон при смене калибровки
+    void recalcBackground();
+
+    //расчет обратной проекции для более точного позиционирование ноги
+    void backProjection(Mat &inputMask, Mat &inputDepth, Mat &maskOut);
+
+    //Обработка маски
+    void maskDenoiseFloodFill(const Mat &mask, Mat &maskOut, int minCount, int maxCount);
+    void maskFilter(const Mat &mask, Mat &maskOut, Mat &maskTemp);
+
+    Mat _erodeMask, _dilateMask;
 
 };

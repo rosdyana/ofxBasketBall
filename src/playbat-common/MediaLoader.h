@@ -6,24 +6,29 @@
 #include <deque>
 
 //считать содержимое папки
-vector<string> readDir( string path, bool onlyImages = false );
+vector<string> readDir(string path, bool onlyImages = false);
 
 
 struct MediaLoaderItem {
-	MediaLoaderItem() { pImage = 0; pSample = 0; }
-	string fileName;
-	ofImage *pImage;
-	ofSoundPlayer *pSample;
-	void execute() {
-		if( pImage ) {
-			pImage->loadImage( fileName );
-			pImage = 0;
-		}
-		if( pSample ) {
-			pSample->loadSound( fileName );
-			pSample = 0;
-		}
-	}
+    MediaLoaderItem()
+    {
+        pImage = 0;
+        pSample = 0;
+    }
+    string fileName;
+    ofImage *pImage;
+    ofSoundPlayer *pSample;
+    void execute()
+    {
+        if (pImage) {
+            pImage->loadImage(fileName);
+            pImage = 0;
+        }
+        if (pSample) {
+            pSample->loadSound(fileName);
+            pSample = 0;
+        }
+    }
 };
 
 
@@ -31,18 +36,21 @@ struct MediaLoaderItem {
 class MediaLoader
 {
 public:
-	MediaLoader(void);
-	~MediaLoader(void);
-	void setup();
-	void update();
-	void loadAll();					//принудительная загрузка всего контента
-	void draw( float w, float h );
-	bool loading() { return !_item.empty(); }		//идет процесс загрузки
+    MediaLoader(void);
+    ~MediaLoader(void);
+    void setup();
+    void update();
+    void loadAll();					//принудительная загрузка всего контента
+    void draw(float w, float h);
+    bool loading()
+    {
+        return !_item.empty();    //идет процесс загрузки
+    }
 
-	void pushImage( ofImage *image, const string &fileName );
-	void pushSound( ofSoundPlayer *sample, const string &fileName );
+    void pushImage(ofImage *image, const string &fileName);
+    void pushSound(ofSoundPlayer *sample, const string &fileName);
 private:
-	deque<MediaLoaderItem> _item;
+    deque<MediaLoaderItem> _item;
 
 
 };
@@ -50,6 +58,6 @@ private:
 extern MediaLoader lazyLoader;
 
 //Глобальные функции
-void lazyLoadImage( ofImage &image, const string &fileName );
-void lazyLoadSound( ofSoundPlayer &sample, const string &fileName );
+void lazyLoadImage(ofImage &image, const string &fileName);
+void lazyLoadSound(ofSoundPlayer &sample, const string &fileName);
 

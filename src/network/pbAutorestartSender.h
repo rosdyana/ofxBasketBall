@@ -8,20 +8,20 @@
 class pbAutorestartSender
 {
 public:
-	void setup( bool enabled, int port, float sendLoopSec, bool verbose );
-	void exit();		//пользователь нажал exit, надо это послать, срочной отправкой
-	void update();
+    void setup(bool enabled, int port, float sendLoopSec, bool verbose);
+    void exit();		//пользователь нажал exit, надо это послать, срочной отправкой
+    void update();
 
 
 private:
-	bool _enabled;
-	int _port;
-	float _sendLoopSec;
-	bool _verbose;
+    bool _enabled;
+    int _port;
+    float _sendLoopSec;
+    bool _verbose;
 
-	pbSenderOSC _sender;
-	float _time;
+    pbSenderOSC _sender;
+    float _time;
 
-	void sendMessage( const string &message );
+    void sendMessage(const string &message);
 
 };

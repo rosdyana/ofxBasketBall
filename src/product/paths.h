@@ -8,28 +8,29 @@ using namespace std;
 
 //работа с путями к основным файлам программы
 
-class Paths {
+class Paths
+{
 public:
-	Paths();
-    void init( const string &binPath );
+    Paths();
+    void init(const string &binPath);
 
-	string binPath();			//путь к исполняемым модулям
-	string settingsPath();		//путь к настройкам
-	string docPath();			//путь к документам
-	string siteUrl();			//сайт
-	string onlineHelpUrl();
-	string gettingStartedFileName();	
-	string supportUrl();		//переход на страницу support
-	string buyUrl();			//страница покупки
+    string binPath();			//путь к исполняемым модулям
+    string settingsPath();		//путь к настройкам
+    string docPath();			//путь к документам
+    string siteUrl();			//сайт
+    string onlineHelpUrl();
+    string gettingStartedFileName();
+    string supportUrl();		//переход на страницу support
+    string buyUrl();			//страница покупки
 
-	string defaultSettingsIniFile();
-	string userSettingsIniFile();
-	string runAppCommand();		//команда для запуска главного приложения
+    string defaultSettingsIniFile();
+    string userSettingsIniFile();
+    string runAppCommand();		//команда для запуска главного приложения
 
 private:
-	string _binPath;
-	string _settingsPath;
-	string _docPath;
+    string _binPath;
+    string _settingsPath;
+    string _docPath;
 
 };
 
