@@ -71,7 +71,7 @@ ofImage		_tubeImageBack, _tubeImageFront;
 int _tubeEdge0, _tubeEdgeN;
 
 
-const int nCatalog = 4;
+const int nCatalog = 3;
 const int nCircleClasses = nCatalog + 1;
 ofImage circleImage[ nCircleClasses ];
 
@@ -230,12 +230,12 @@ void App::setup()
 
 
 
-    int n = 30; //15; //150;
+    int n = 10; //15; //150;
     for (int i = 0; i < n; i++) {
 
         CircleData c;
-        c.rad		= ofRandom(15, 20);   //ofRandom( 10, 20 ); //ofRandom( 5, 20 );
-        c.p			= ofPoint(ofRandom(c.rad, _w - c.rad), ofRandom(c.rad, _h / 2));
+        c.rad		= ofRandom(18, 20);   //ofRandom( 10, 20 ); //ofRandom( 5, 20 );
+        c.p			= ofPoint(ofRandom(c.rad, _w - c.rad), ofRandom(c.rad, _h / 4));
         c.angleDeg		= 0.0;
         c.groupIndex	= 0;
         c.density		= 10.0;//1.0;
@@ -271,6 +271,7 @@ void App::update(float dt)
         }
         if (!_foregr.learning() && target == 1.0) {
             _learningBackgroundMessageAlpha.setTarget(0.0);
+			_score = 0;
         }
         _learningBackgroundMessageAlpha.update(dt);
     }
@@ -374,8 +375,6 @@ void App::drawProduction()
     ofSetHexColor(0x009fff);
     score.drawString("Score : " + ofToString(countScore()), 40, 40);
     if (countScore() >= _goalScore) {
-        //ofSetHexColor(0xff69b4);
-        //score.drawString("CONGRATULATIONS\nPress R to restart.\nPress L to Re-configure.", 250, 300);
 		{
 			float scale = 1.0 * congratulationPanel.getWidth() / congratulationPanel.getHeight();
 			int w = _w / 2;

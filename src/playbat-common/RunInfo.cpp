@@ -196,7 +196,7 @@ void RunInfo::setup(int argc, char *argv[], ofAppGlutWindow *window)
                       screenWidth(), screenHeight(),
                       (fullScreen() == 1) ? OF_FULLSCREEN : OF_WINDOW
                      );			// <-------- setup the GL context
-        ofSetWindowTitle("final project");
+        ofSetWindowTitle("ofxBasketBall - 1056035");
 
         if (fullScreen() == 2) {
             ofSetWindowPosition(0, 0);
@@ -400,7 +400,7 @@ void RunInfo::consoleHide()
 void RunInfo::windowShow()
 {
     glutShowWindow();
-    string title = "final project";
+    string title = "ofxBasketBall - 1056035";
     HWND hWnd = FindWindowA(0, title.c_str());
     if (hWnd) {
         SetForegroundWindow(hWnd);
