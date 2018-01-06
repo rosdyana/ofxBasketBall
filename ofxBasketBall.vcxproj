@@ -261,7 +261,6 @@
     <ClCompile Include="src\playbat-common\pbScreenFormat.cpp" />
     <ClCompile Include="src\playbat-common\pbScreenGrab.cpp" />
     <ClCompile Include="src\playbat-common\pbScreenLog.cpp" />
-    <ClCompile Include="src\playbat-common\pbSounds.cpp" />
     <ClCompile Include="src\playbat-common\pbSystem.cpp" />
     <ClCompile Include="src\playbat-common\pbTextureLiquid.cpp" />
     <ClCompile Include="src\playbat-common\pbTextureUtil.cpp" />
@@ -544,7 +543,6 @@
     <ClInclude Include="src\playbat-common\pbScreenFormat.h" />
     <ClInclude Include="src\playbat-common\pbScreenGrab.h" />
     <ClInclude Include="src\playbat-common\pbScreenLog.h" />
-    <ClInclude Include="src\playbat-common\pbSounds.h" />
     <ClInclude Include="src\playbat-common\pbSystem.h" />
     <ClInclude Include="src\playbat-common\pbTextureLiquid.h" />
     <ClInclude Include="src\playbat-common\pbTextureUtil.h" />

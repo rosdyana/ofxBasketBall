@@ -301,9 +301,6 @@
     <ClCompile Include="src\playbat-common\pbScreenLog.cpp">
       <Filter>src\playbat-common</Filter>
     </ClCompile>
-    <ClCompile Include="src\playbat-common\pbSounds.cpp">
-      <Filter>src\playbat-common</Filter>
-    </ClCompile>
     <ClCompile Include="src\playbat-common\pbSystem.cpp">
       <Filter>src\playbat-common</Filter>
     </ClCompile>
@@ -1299,9 +1296,6 @@
       <Filter>src\playbat-common</Filter>
     </ClInclude>
     <ClInclude Include="src\playbat-common\pbScreenLog.h">
-      <Filter>src\playbat-common</Filter>
-    </ClInclude>
-    <ClInclude Include="src\playbat-common\pbSounds.h">
       <Filter>src\playbat-common</Filter>
     </ClInclude>
     <ClInclude Include="src\product\paths.h">
