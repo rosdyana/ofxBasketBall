@@ -1,6 +1,12 @@
 # ofxBasketBall
 Basketball game using Openframework with box2d and OpenCV
 
+## Slides
+https://goo.gl/eTqm81
+
+## Video Demo
+
+
 ## openframework addons
 - ofxBox2d - http://github.com/vanderlin/ofxBox2d
 - ofxOpenCv
