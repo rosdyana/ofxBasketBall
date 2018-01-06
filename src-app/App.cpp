@@ -15,6 +15,7 @@
 #include "pcvConverter.h"
 
 int _score = 0;
+int _goalScore = 0;
 int _w = 800;
 int _h = 600;
 int _frameRate = 60;
@@ -57,6 +58,9 @@ ofImage backgroundImage;
 
 ofImage learningBackgroundMessage; //"LearningBackgroundMessage.png"
 pbValueAnimation _learningBackgroundMessageAlpha;
+
+ofImage congratulationPanel;
+pbValueAnimation _congratulationPanelAlpha;
 
 //b2Body* body;
 PhysicsWorld _physics;
@@ -111,7 +115,7 @@ void initTube()
 
     _tubeImageBack.loadImage("Basket/Basket-Back.png");
     _tubeImageFront.loadImage("Basket/Basket-Front.png");
-
+	_goalScore = ini.get("Hat.goalscore", 10);
     float tw = _tubeImageFront.getWidth();
     float th = _tubeImageFront.getHeight();
 
@@ -191,6 +195,8 @@ void App::setup()
 
     learningBackgroundMessage.loadImage("LearningBackgroundMessage.png");
     _learningBackgroundMessageAlpha.setup(1.0, 0.0);
+
+	congratulationPanel.loadImage("Congratulation.png");
 
     {
 
@@ -367,9 +373,16 @@ void App::drawProduction()
     }
     ofSetHexColor(0x009fff);
     score.drawString("Score : " + ofToString(countScore()), 40, 40);
-    if (countScore() >= 10) {
-        ofSetHexColor(0xff69b4);
-        score.drawString("CONGRATULATIONS\nPress R to restart.\nPress L to Re-configure.", 250, 300);
+    if (countScore() >= _goalScore) {
+        //ofSetHexColor(0xff69b4);
+        //score.drawString("CONGRATULATIONS\nPress R to restart.\nPress L to Re-configure.", 250, 300);
+		{
+			float scale = 1.0 * congratulationPanel.getWidth() / congratulationPanel.getHeight();
+			int w = _w / 2;
+			int h = w / scale;
+	
+			congratulationPanel.draw((_w - w) / 2, (_h - h) / 2, w, h);
+		}
     }
 }
 
@@ -504,6 +517,7 @@ void App::keyPressed(int key)
 
         case 'l': {
             _foregr.startLearn(kLearnDelay, kLearnDuration, _backgroundLearnFileName);
+			_score = 0;
         }
         break;
         case 'r': {
